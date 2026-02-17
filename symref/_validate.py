@@ -7,6 +7,14 @@ from symref._ref import ref
 
 
 class SymrefError(Exception):
+    """
+    Raised when one or more :class:`~symref.ref` paths cannot be resolved.
+
+    Attributes:
+        broken: List of :class:`~symref.ref` instances that failed to resolve.
+
+    """
+
     def __init__(self, broken: list[ref]) -> None:
         self.broken = broken
         lines = [
@@ -47,6 +55,20 @@ def _resolve(path: str) -> bool:
 
 
 def validate_refs(kind: str | None = None) -> None:
+    """
+    Validate that every registered :class:`~symref.ref` resolves.
+
+    Iterates over all refs in the global registry (optionally filtered by
+    *kind*) and checks that each dotted path points to a real module or
+    attribute.
+
+    Args:
+        kind: If given, only refs whose *kind* matches this value are checked.
+
+    Raises:
+        SymrefError: If any refs cannot be resolved.
+
+    """
     targets = [r for r in ref._registry if kind is None or r._kind == kind]
     broken = [r for r in targets if not _resolve(r)]
     if broken:

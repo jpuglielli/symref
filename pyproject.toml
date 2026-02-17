@@ -16,6 +16,10 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.15.1",
 ]
+docs = [
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["symref"]
