@@ -66,8 +66,22 @@ Raised when one or more refs can't be resolved. The `.broken` attribute contains
 
 - `ref()` is a `str` subclass -- zero overhead after construction
 - Each `ref()` call appends to `ref._registry` and captures the caller's file/line via `sys._getframe()`
-- `validate_refs()` uses `importlib.util.find_spec()` to check modules, and imports the parent module only when verifying attributes
+- `validate_refs()` uses `importlib.util.find_spec()` to check modules. When verifying attributes, it imports the parent module via `importlib.import_module()` -- this may execute module-level code as a side effect
 - No imports happen at `ref()` construction time -- validation is fully deferred
+
+## Documentation
+
+Build and preview the docs locally:
+
+```bash
+uv run mkdocs serve
+```
+
+Then open <http://127.0.0.1:8000>.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, testing, and PR guidelines.
 
 ## License
 

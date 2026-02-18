@@ -3,10 +3,6 @@ from __future__ import annotations
 from symref import ref
 
 
-def setup_function() -> None:
-    ref._registry.clear()
-
-
 def test_ref_is_str() -> None:
     r = ref("os.path")
     assert isinstance(r, str)

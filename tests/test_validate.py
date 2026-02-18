@@ -5,11 +5,6 @@ import pytest
 from symref import SymrefError, ref, validate_refs
 from symref._validate import _resolve
 
-
-def setup_function() -> None:
-    ref._registry.clear()
-
-
 # --- _resolve tests ---
 
 

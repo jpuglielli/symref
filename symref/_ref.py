@@ -38,3 +38,7 @@ class ref(str):  # noqa: N801
         instance._source = _capture_source()
         cls._registry.append(instance)
         return instance
+
+    def __reduce__(self) -> tuple[type, tuple[str]]:
+        """Pickle as a plain ``str`` to avoid re-registering on unpickle."""
+        return (str, (str(self),))
